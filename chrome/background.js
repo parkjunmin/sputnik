@@ -107,6 +107,13 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
+    "id": "Criminalip IP",
+    "title": "Criminalip",
+    "parentId": "IP",
+    "contexts": ["selection", "link", "image", "video", "audio"]
+});
+
+chrome.contextMenus.create({
     "id": "SecurityTrails IP",
     "title": "SecurityTrails",
     "parentId": "IP",
@@ -617,6 +624,10 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
             case "SecurityTrails IP":
                 urls.push("https://securitytrails.com/list/ip/"+artifact);
                 if (!fallthrough) { break; }
+            
+            case "Criminal IP":
+                urls.push("https://api.criminalip.io/v1/ip/data?ip="+artifact+"&full=true");
+                if (!fallthrough) { break; }
 
             case "Shodan IP":
                 urls.push("https://www.shodan.io/host/"+artifact);
@@ -679,6 +690,10 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
             case "host.io Domain":
                 urls.push("https://host.io/"+artifact);
+                if (!fallthrough) { break; }
+            
+            case "Criminal Domain":
+                urls.push("https://api.criminalip.io/v1/domain/reports?query="+artifact);
                 if (!fallthrough) { break; }
 
             case "MX Toolbox Domain":
